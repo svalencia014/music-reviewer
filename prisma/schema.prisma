@@ -1,0 +1,50 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Post {
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  rating    Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  songId    String
+
+  song      Song     @relation(fields: [songId], references: [id])
+
+  @@map("posts")
+}
+
+model Song {
+  id       String @id @default(uuid())
+  title    String
+  artistId String
+  albumId  String
+  posts    Post[]
+
+  album    Album  @relation(fields: [albumId], references: [id])
+  artist   Artist @relation(fields: [artistId], references: [id])
+
+  @@map("songs")
+}
+
+model Album {
+  id     String @id @default(uuid())
+  title  String
+  songs  Song[]
+  artistId String
+
+  artist Artist @relation(fields: [artistId], references: [id])
+
+  @@map("albums")
+}
+
+model Artist {
+  id     String     @id @default(uuid())
+  name   String
+  albums Album[]
+  songs  Song[]
+}
+

@@ -1,2 +1,11 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+
+<div>
+  <h2>Recent Posts</h2>
+  <p>There are no posts yet </p>
+</div>
+
+<div>
+  <p>View Songs</p>
+  <p>View Albums</p>
+  <p>View Artists</p>
+</div>
