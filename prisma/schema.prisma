@@ -3,6 +3,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+generator client {
+  provider = "prisma-client-js"
+}
+
 model Post {
   id        String   @id @default(uuid())
   title     String
@@ -11,8 +15,9 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   songId    String
+  public    Boolean  @default(false)
 
-  song      Song     @relation(fields: [songId], references: [id])
+  song Song @relation(fields: [songId], references: [id])
 
   @@map("posts")
 }
@@ -24,16 +29,16 @@ model Song {
   albumId  String
   posts    Post[]
 
-  album    Album  @relation(fields: [albumId], references: [id])
-  artist   Artist @relation(fields: [artistId], references: [id])
+  album  Album  @relation(fields: [albumId], references: [id])
+  artist Artist @relation(fields: [artistId], references: [id])
 
   @@map("songs")
 }
 
 model Album {
-  id     String @id @default(uuid())
-  title  String
-  songs  Song[]
+  id       String @id @default(uuid())
+  title    String
+  songs    Song[]
   artistId String
 
   artist Artist @relation(fields: [artistId], references: [id])
@@ -42,9 +47,27 @@ model Album {
 }
 
 model Artist {
-  id     String     @id @default(uuid())
+  id     String  @id @default(uuid())
   name   String
   albums Album[]
   songs  Song[]
 }
 
+model User {
+  id       String    @id @default(uuid())
+  email    String    @unique
+  name     String
+  admin    Boolean   @default(false)
+  sessions Session[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+
+  @@map("sessions")
+}

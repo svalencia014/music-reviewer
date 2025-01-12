@@ -1,11 +1,16 @@
+<script>
+  export let data;
+  console.log(data);
+</script>
+
+
+<svelte:head>
+  <title>Samuel's Music Reviews</title>
+</svelte:head>
 
 <div>
   <h2>Recent Posts</h2>
-  <p>There are no posts yet </p>
-</div>
-
-<div>
-  <p>View Songs</p>
-  <p>View Albums</p>
-  <p>View Artists</p>
+  {#if data.data.length == 0}
+    <p>There are no posts yet </p>
+  {/if}
 </div>
