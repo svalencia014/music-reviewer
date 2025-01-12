@@ -4,5 +4,9 @@
 	let { children } = $props();
 </script>
 
+<svelte:head>
+	<link rel="icon" type="image/ixon" href="/favicon.png"/>
+</svelte:head>
+
 <Navbar />
 {@render children()}

@@ -18,6 +18,7 @@
 		"@sveltejs/adapter-node": "^5.2.9",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
+		"@types/node": "^22.10.5",
 		"autoprefixer": "^10.4.20",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -37,6 +38,9 @@
 	"dependencies": {
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
-		"@prisma/client": "6.1.0"
+		"@pilcrowjs/object-parser": "^0.0.4",
+		"@prisma/client": "6.1.0",
+		"arctic": "^3.1.1",
+		"dotenv": "^16.4.7"
 	}
 }
