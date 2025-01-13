@@ -8,5 +8,5 @@
 	<link rel="icon" type="image/ixon" href="/favicon.png"/>
 </svelte:head>
 
-<Navbar />
+<Navbar canViewAdmin={true}/>
 {@render children()}

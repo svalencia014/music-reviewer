@@ -1,7 +1,6 @@
 import { prisma } from "$lib/db";
 import { createSession, generateSessionToken, setSessionTokenCookie } from "$lib/auth";
 import type { RequestEvent } from "@sveltejs/kit";
-import { type User } from "@prisma/client";
 import { google } from "$lib/oauth";
 import { decodeIdToken, type OAuth2Tokens } from "arctic";
 import { ObjectParser } from "@pilcrowjs/object-parser";
@@ -27,6 +26,7 @@ export async function GET(event: RequestEvent) {
   try {
     tokens = await google.validateAuthorizationCode(code, codeVerifier);
   } catch (e) {
+    console.error(e);
     return new Response("Please restart the process.", {
       status: 400
     })
