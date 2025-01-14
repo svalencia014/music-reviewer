@@ -8,8 +8,6 @@ export const load: PageServerLoad = async () => {
     }
   });
 
-  console.log(data);
-
   if (data.length == 0) {
     return { data: []}
   }
