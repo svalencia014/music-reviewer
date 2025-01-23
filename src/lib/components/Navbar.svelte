@@ -1,19 +1,29 @@
 <script lang="ts">
   import { page } from '$app/state';
+  import { Dropdown, Navbar, NavBrand, NavLi, NavUl, NavHamburger} from 'flowbite-svelte';
   console.log(page.data);
 </script>
 
-<div class="w-screen h-20 bg-opacity-80 z-0 flex justify-center items-center gap-x-4 align-middle">
-  <a href="/">Samuel's Music Reviews</a>
-  <p>Songs</p>
-  <p>Albums</p>
-  <p>Artists</p>
-  {#if page.data.user.admin}
-    <p>New Post</p>
-  {/if}
-  {#if page.data.user == null}
-    <a href="/login">Login</a>
-  {:else}
-    <a href='/profile'>Profile</a>
-  {/if}
-</div>
+<Navbar let:hidden let:toggle>
+  <NavBrand href="/" >
+    <p>Samuel's Music Reviews</p>
+  </NavBrand>
+  <NavHamburger on:click={toggle}/>
+  <NavUl class="pt-2">
+    <NavLi><p>Songs</p></NavLi>
+    <NavLi><p>Albums</p></NavLi>
+    <NavLi><p>Artists</p></NavLi>
+    {#if page.data.user.admin}
+      <NavLi><p>New Post</p></NavLi>
+    {/if}
+    {#if page.data.user != null}
+      <NavLi>{page.data.user.name}</NavLi>
+      <Dropdown>
+        <p>Profile</p>
+        <p>Logout</p>
+      </Dropdown>
+    {:else}
+      <NavLi href="/login">Login</NavLi>
+    {/if}
+  </NavUl>
+</Navbar>
